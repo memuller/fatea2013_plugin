@@ -152,7 +152,7 @@
 				$sql = $wpdb->prepare("select * from ".static::table_name()." where id = %d", $values) ;
 				$values = $wpdb->get_row($sql, ARRAY_A) ;
 			}
-			$this->creation_parameters = $values ; 		 
+			$this->creation_parameters = $values ;
 			if($save === true){
 				$this->persist();
 			} else {
@@ -291,6 +291,15 @@
 			if(stripos($type, 'int')) return false ;
 			
 
+		}
+
+		static function find($id){
+			global $wpdb;
+			$sql = $wpdb->prepare("select * from ".static::table_name()." where id=%s", $id);
+			if($object = $wpdb->get_row($sql)){
+				return new static($object, false);
+			}
+			return null;
 		}
 
 		static function all($args=array()){

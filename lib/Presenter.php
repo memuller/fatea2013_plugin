@@ -43,13 +43,35 @@
 
 		static function admin_styles(){}
 		static function admin_scripts(){}
-		static function styles(){}
-		static function scripts(){}
-		static function build(){
+		static function styles(){
 			$class = get_called_class();
-			foreach ($class::$uses as $resource) {
-				add_action('wp_enqueue_scripts', "$class::$resource" );
+			$namespace = explode('\\',get_namespace($class)); $namespace = $namespace[0];
+			foreach($class::$presents_for as $type => $name ){
+				wp_enqueue_style( strtolower($namespace).'-'.$name, static::url("css/$name.css"), array('jquery') )	;
 			}
+			
+		}
+		static function scripts(){
+			$class = get_called_class();
+			$namespace = explode('\\',get_namespace($class)); $namespace = $namespace[0];
+			foreach($class::$presents_for as $type => $name ){
+				wp_enqueue_script( strtolower($namespace).'-'.$name, static::url("js/$name.js"), array('jquery') )	;
+			}
+		}
+		static function build(){
+			$class = get_called_class(); 
+			foreach ($class::$uses as $resource) {
+				if(strstr($resource, 'admin')){
+					add_action('admin_enqueue_scripts', "$class::$resource");
+				} else {
+					add_action('wp_enqueue_scripts', "$class::$resource" );
+				}
+			}
+		}
+
+		static function url($arg){
+			$class = get_called_class(); $base = get_namespace($class) . '\Plugin';
+			return $base::url($arg);
 		}
 	}
 
@@ -62,7 +84,7 @@
 	}
 
 	function description($text, $classes=''){
-		printf("<span class='description $classes'>%s</span>", $text);
+		printf("<span style='display:block;' class='description $classes'>%s</span>", $text);
 	}
 
 	function label($label, $for, $classes=null){
