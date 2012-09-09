@@ -31,6 +31,7 @@
 	require_once 'vendors/haml/HamlParser.class.php' ;
 
 	if(!class_exists('Presenter')) require_once 'lib/Presenter.php' ;
+	if(!class_exists('BasePost')) require_once 'lib/BasePost.php' ;
 	if(!class_exists('DB_Object')) require_once 'lib/DB_Object.php' ;
 	if(!class_exists('CustomPost')) require_once 'lib/CustomPost.php' ;
 

@@ -5,12 +5,14 @@
 	class Course extends CustomPost {
 
 		static $name = "course" ;
-		static $editable_by = array('form_advanced');
+		static $editable_by = array(
+			'form_advanced' => array('profession', 'about', 'laboratories', 'extensions')
+			 );
 		static $creation_fields = array( 
 			'label' => 'course','description' => '',
 			'public' => true,'show_ui' => true,'show_in_menu' => true,'capability_type' => 'post',
 			'hierarchical' => false,'rewrite' => array('slug' => 'cursos'),'query_var' => true,
-			'supports' => array('custom-fields', 'title', 'editor', 'thumbnail'), 'publicly_queryable' => true,
+			'supports' => array('custom-fields', 'title', 'thumbnail'), 'publicly_queryable' => true,
 			'has_archive' => true, 'taxonomies' => array(),
 			'labels' => array (
 				'name' => 'Cursos',
@@ -19,11 +21,18 @@
 		) ;
 
 		static $fields = array(
-			'profissao' => array('type' => 'richtext', 'label' => 'O que é a profissão'),
-			'mercado' => array('type' => 'richtext', 'label' => 'Oportunidades & Mercado de Trabalho'),
-			'na_fatea' => array('type' => 'richtext', 'label' => 'Na FATEA'),
-			'laboratorios' => array('type' => 'richtext', 'label' => 'Laboratórios Utilizados'),
-			'extensoes' => array('type' => 'richtext', 'label' => 'Ações & Projetos de Extensão')
+			'profession' => array('type' => 'richtext', 'label' => 'O que é a profissão'),
+			'about' => array('type' => 'richtext', 'label' => 'Na FATEA'),
+			'laboratories' => array('type' => 'richtext', 'label' => 'Laboratórios Utilizados'),
+			'extensions' => array('type' => 'richtext', 'label' => 'Ações & Projetos de Extensão'),
+
+			'periodicy' => array('type' => 'set', 'label' => 'Periodicidade',
+				'values' => array('semestral' => 'Semestral', 'anual' => 'Anual')),
+			'spaces' => array('type' => 'integer', 'label' => 'Nº de Vagas'),
+			'period' => array('type' => 'set', 'label' => 'Período',
+				'values' => array('matinal' => 'Matutino', 'nocturnal' => 'Noturno') ),
+			'status' => array('type' => 'text', 'label' => 'Estado legal'),
+			'duration' => array('type' => 'integer', 'label' => 'Duração')
 		) ;
 
 		static function build(){
