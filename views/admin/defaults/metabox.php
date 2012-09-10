@@ -1,15 +1,17 @@
 <?php 
+ob_start();
 foreach($fields as $field => $options){ 
 	if( 'richtext' == $options['type']){ 
 		$id = $type.'_'.$field; $name =  $type.'['.$field.']' ; $html = ''; ?>
 
-		<h2><?php echo $options['label']; ?></h3>
+		<h2><?php echo $options['label']; ?></h2>
 		<?php if(isset($options['description'])) description($options['description']) ?>
 		<?php wp_editor($object->$field, $id, array('textarea_name' => $name, 'teeny' => true, 'media_buttons' => false)) ?>
 		
 		<?php unset($fields[$field]);
 	}
 }
+$rich_editors = ob_get_clean();
 ?>
 <?php if (!empty($fields)): ?>
 	<table class='form-table'>
@@ -84,6 +86,7 @@ foreach($fields as $field => $options){
 		</tbody>
 	</table>
 <?php endif ?>
+<?php echo $rich_editors; ?>
 <?php if(isset($custom_single)){?>
 	<input type="hidden" name="custom_single" value="<?php $custom_single = explode('\\', $custom_single); echo $custom_single[sizeof($custom_single)-1] ?>">
 <?php } ?>
