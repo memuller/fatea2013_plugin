@@ -129,7 +129,7 @@
 							wp_enqueue_script('jquery-datepick-br', $base::url('js/jquery-datepick/jquery.datepick-pt-BR.js'), array('jquery-datepick'));
 							wp_enqueue_style('jquery-datepick', $base::url('js/jquery-datepick/smoothness.datepick.css'));
 						}
-						if('photo' == $options['type']){
+						if('media' == $options['type']){
 							wp_enqueue_script('media_upload');
 							wp_enqueue_script('thickbox');
 						}
