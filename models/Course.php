@@ -6,7 +6,7 @@
 
 		static $name = "course" ;
 		static $editable_by = array(
-			'form_advanced' => array( 'video_url', 'profession', 'about', 'labs', 'projects'),
+			'form_advanced' => array( 'video_url', 'guy_photo', 'profession', 'about', 'labs', 'projects'),
 			'info' => array('name' => 'Informações', 'fields' => array('periodicy', 'type', 'status', 'duration', 'spaces', 'period' ))
 			 );
 		static $creation_fields = array( 
@@ -26,9 +26,13 @@
 			'about' => array('type' => 'richtext', 'label' => 'Na FATEA'),
 			'labs' => array('type' => 'richtext', 'label' => 'Laboratórios Utilizados'),
 			'projects' => array('type' => 'richtext', 'label' => 'Ações & Projetos de Extensão'),
-			'video_url' => array('type' => 'url', 'size' => 80, 'label' => 'Vídeo', 'description' => 'URL do vídeo institucional no Youtube.'),
+			'video_url' => array('type' => 'url', 'size' => 80, 'label' => 'Vídeo', 
+				'description' => 'URL do vídeo institucional no Youtube. Se deixado em branco, uma imagem de thumbnail será utilizada.'),
+			'guy_photo' => array('type' => 'image', 'label' => 'Foto publicitária',
+				'description' => 'Acompanha o vídeo/thumbnail.'),
+
 			'type' => array('type' => 'set', 'label' => 'Certificação', 
-				'values' => array( 'licenciature' => 'Licenciatura', 'bachelor' => 'Bacharelato' )),
+				'values' => array( 'licenciature' => 'Licenciatura', 'bachelor' => 'Bacharelado' )),
 			'periodicy' => array('type' => 'set', 'label' => 'Periodicidade',
 				'values' => array('semestral' => 'Semestral', 'anual' => 'Anual')),
 			'spaces' => array('type' => 'integer', 'label' => 'Nº de Vagas'),
