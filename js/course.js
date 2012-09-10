@@ -18,6 +18,8 @@ jQuery(document).ready( function($) {
 
 				$('#previous').attr('href', $previous.attr('href'));
 				$('#next').attr('href', $next.attr('href'));
+
+				document.location.hash = $(newItems).attr('id');
 				
 			}
 		}
