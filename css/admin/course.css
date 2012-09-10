@@ -1,3 +1,4 @@
-#normal-sortables { display:none; }
+#normal-sortables, #edit-slug-box { display:none; }
 .wp-editor-tools { display:none;}
+#message a , #minor-publishing-actions { display:none !important; }
 h2 { margin-bottom: 0px !important;}
