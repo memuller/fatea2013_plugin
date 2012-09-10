@@ -141,8 +141,6 @@
 									});
 									window.send_to_editor = function(html){
 										$(window.image_uploader_field).val( $(html)[0]) ;
-										console.log(window.image_uploader_field);
-										console.log($(html)[0]);
 										tb_remove();
 									}
 								});",$class::$name.'_'.$field ) ;
