@@ -1,1 +1,12 @@
 #postcustom {display:none !important;}
+
+/* == Custom icons for Courses */
+#menu-posts-course div.wp-menu-image a img {display:none !important}
+#menu-posts-course div.wp-menu-image {
+    background: url("../../../../../wp-admin/images/menu.png") no-repeat 0 -33px !important;
+}
+#menu-posts-course:hover div.wp-menu-image,
+#menu-posts-course.wp-has-current-submenu div.wp-menu-image {
+    background-position: 0 -1px !important;
+}
+#icon-edit.icon32-posts-course { background: url("../../../../../wp-admin/images/icons32.png") no-repeat -11px -5px !important ; }
