@@ -129,9 +129,25 @@
 							wp_enqueue_script('jquery-datepick-br', $base::url('js/jquery-datepick/jquery.datepick-pt-BR.js'), array('jquery-datepick'));
 							wp_enqueue_style('jquery-datepick', $base::url('js/jquery-datepick/smoothness.datepick.css'));
 						}
-						if('media' == $options['type']){
+						if('image' == $options['type']){
 							wp_enqueue_script('media_upload');
 							wp_enqueue_script('thickbox');
+							add_action('admin_print_scripts', function() use($base, $namespace, $class, $field) {
+								$script = sprintf("jQuery(document).ready( function($) {
+									$('#post').on('click', '.image-upload', function(){
+										window.image_uploader_field = '#%s' ;
+										tb_show('', 'media-upload.php?type=image&TB_iframe=true') ;
+										return false;
+									});
+									window.send_to_editor = function(html){
+										$(window.image_uploader_field).val( $(html)[0]) ;
+										console.log(window.image_uploader_field);
+										console.log($(html)[0]);
+										tb_remove();
+									}
+								});",$class::$name.'_'.$field ) ;
+								print '<script>'.$script.'</script>';
+							}, 99);
 						}
 					}
 				}

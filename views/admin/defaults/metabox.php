@@ -33,7 +33,8 @@ $rich_editors = ob_get_clean();
 				<tr>
 					<th>
 						<?php label($options['label'], $id  ) ?>
-						<?php if($options['type'] == 'text_area'){ description($options['description']); } ?>
+						<?php if($options['type'] == 'text_area') 
+							description($options['description']);  ?>
 					</th>
 					<td>
 						<?php switch ($options['type']) {
@@ -71,6 +72,14 @@ $rich_editors = ob_get_clean();
 								<textarea <?php html_attributes( array( 
 								'name' => $name, 'id' => $id, 'class' => 'text', 'cols' => 50, 'rows' => 3  
 								)) ?><?php echo $html ?>><?php echo $object->$field ?></textarea>
+							<?php break;
+
+							case 'image': ?>
+								<input type="button" value="<?php echo !$object->$field == '' ? 'Alterar imagem' : 'Selecionar imagem' ?>" class='image-upload'>
+								<input type="hidden" <?php html_attributes( array( 
+								'name' => $name, 'id' => $id, 'value' => $object->$field, 'class' => 'text', 'size' => $size 
+								)) ?>> 
+								<?php description($options['description']) ?>
 							<?php break;
 
 							default: ?>
