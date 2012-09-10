@@ -5,7 +5,22 @@ jQuery(document).ready( function($) {
 		prev: '#previous',
 		next: '#next',
 		auto: {play: false},
-		items: {start: true}
+		items: {start: true},
+		scroll: {
+			onAfter: function(oldItems, newItems, newSizes){
+				$('#name h2').html($(newItems).attr('title'));
+				
+				$previous = $(newItems).find('.navigation a.previous');
+				$next = $(newItems).find('.navigation a.next');
+
+				$('#previous p').html($previous.html());
+				$('#next p').html($next.html());
+
+				$('#previous').attr('href', $previous.attr('href'));
+				$('#next').attr('href', $next.attr('href'));
+				
+			}
+		}
 
 	});
 
@@ -22,5 +37,8 @@ jQuery(document).ready( function($) {
 	function(event){
 		$(this).removeClass('next-hover');
 	});
+
+
+
 
 });
