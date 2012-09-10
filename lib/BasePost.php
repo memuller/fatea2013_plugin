@@ -85,6 +85,12 @@
 				return new DateTime($date) ;
 			}
 		}
+
+		function set($field){
+			if(static::$fields[$field]['type'] == 'set'){
+				return static::$fields[$field]['values'][$this->$field];
+			}
+		}
 	}
 		
 ?>
