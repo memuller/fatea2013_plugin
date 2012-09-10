@@ -7,7 +7,7 @@
 		static $name = "course" ;
 		static $editable_by = array(
 			'form_advanced' => array( 'video_url', 'profession', 'about', 'labs', 'projects'),
-			'info' => array('name' => 'Informações', 'fields' => array('periodicy', 'spaces', 'period', 'status', 'duration' ))
+			'info' => array('name' => 'Informações', 'fields' => array('periodicy', 'type', 'status', 'duration', 'spaces', 'period' ))
 			 );
 		static $creation_fields = array( 
 			'label' => 'course','description' => '',
@@ -27,7 +27,8 @@
 			'labs' => array('type' => 'richtext', 'label' => 'Laboratórios Utilizados'),
 			'projects' => array('type' => 'richtext', 'label' => 'Ações & Projetos de Extensão'),
 			'video_url' => array('type' => 'url', 'size' => 80, 'label' => 'Vídeo', 'description' => 'URL do vídeo institucional no Youtube.'),
-
+			'type' => array('type' => 'set', 'label' => 'Certificação', 
+				'values' => array( 'licenciature' => 'Licenciatura', 'bachelor' => 'Bacharelato' )),
 			'periodicy' => array('type' => 'set', 'label' => 'Periodicidade',
 				'values' => array('semestral' => 'Semestral', 'anual' => 'Anual')),
 			'spaces' => array('type' => 'integer', 'label' => 'Nº de Vagas'),
