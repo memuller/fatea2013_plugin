@@ -14,6 +14,7 @@
 			add_action('pre_get_posts', function($query) use($class, $namespace) {
 				if( !is_admin() && $query->is_main_query() && $query->query['post_type'] == 'course' ){
 					$query->set('order', 'ASC'); $query->set('orderby', 'title');
+					$query->set('numberposts', 13);
 				}
 			});
 		}
