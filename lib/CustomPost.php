@@ -23,6 +23,7 @@
 				foreach ($class::$fields as $field => $options) {
 					if(in_array($field, $class::$editable_by['form_advanced'] )){
 						$fields_to_use = array_merge($fields_to_use, array($field => $options)  );
+						unset($fields[$field]);
 					}
 				}
 				add_action('edit_form_advanced', function() use($class, $fields_to_use) {
@@ -32,24 +33,25 @@
 						$presenter::render('admin/defaults/metabox', array( 'type' => $class::$name, 'object' => $object, 'fields' => $fields_to_use ));
 					}
 				});
-				unset($class::$editable_by['form_advanced']);
+				unset($editable_by['form_advanced']);
 			}
 
 			// Renders a main metabox, if needed.
 			if(sizeof($editable_by) > 0 ){
-				add_action('add_meta_boxes', function() use ($class) {
-					if(sizeof($editable_by > 1)){
-						foreach ($editable_by as $metabox => $options) {
-							add_meta_box($class::$name.'-'.$metabox, $options['name'] , function() use ($class) {
-								$object = new $class(); $presenter = get_namespace($class).'\Presenters\Base'; 
-								$presenter::render('admin/defaults/metabox', array( 'type' => $class::$name, 'object' => $object, 'fields' => $class::$fields ));
-							}, $class::$name, 'normal', 'high');
+				add_action('add_meta_boxes', function() use ($class, $fields, $editable_by) {
+					foreach ($editable_by as $metabox => $options) {
+						$fields_to_use = array();
+						foreach($fields as $field => $field_options){
+							if(in_array($field, $options['fields'])){
+								$fields_to_use = array_merge($fields_to_use, array($field => $field_options));
+								unset($fields[$field]);
+							}
 						}
-					} else {
-						add_meta_box($class::$name.'-main', 'Informações do '. $class::$creation_fields['labels']['singular_name'] , function() use ($class) {
+						$placing = isset($options['placing']) ? $options['placing'] : 'side';
+						add_meta_box($class::$name.'-'.$metabox, $options['name'] , function() use ($class, $fields_to_use) {
 							$object = new $class(); $presenter = get_namespace($class).'\Presenters\Base'; 
-							$presenter::render('admin/defaults/metabox', array( 'type' => $class::$name, 'object' => $object, 'fields' => $class::$fields ));
-						}, $class::$name, 'normal', 'high');
+							$presenter::render('admin/defaults/metabox', array( 'type' => $class::$name, 'object' => $object, 'fields' => $fields_to_use ));
+						}, $class::$name, $placing, 'high');
 					}
 
 				});

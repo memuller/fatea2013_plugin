@@ -6,7 +6,8 @@
 
 		static $name = "course" ;
 		static $editable_by = array(
-			'form_advanced' => array('profession', 'about', 'laboratories', 'extensions')
+			'form_advanced' => array('profession', 'about', 'laboratories', 'extensions'),
+			'info' => array('name' => 'Informações', 'fields' => array('periodicy', 'spaces', 'period', 'status', 'duration' ))
 			 );
 		static $creation_fields = array( 
 			'label' => 'course','description' => '',
@@ -31,8 +32,8 @@
 			'spaces' => array('type' => 'integer', 'label' => 'Nº de Vagas'),
 			'period' => array('type' => 'set', 'label' => 'Período',
 				'values' => array('matinal' => 'Matutino', 'nocturnal' => 'Noturno') ),
-			'status' => array('type' => 'text', 'label' => 'Estado legal'),
-			'duration' => array('type' => 'integer', 'label' => 'Duração')
+			'status' => array('type' => 'text', 'label' => 'Estado legal', 'description' => 'portaria no MEC, etc.'),
+			'duration' => array('type' => 'integer', 'label' => 'Duração', 'description' => 'em anos.')
 		) ;
 
 		static function build(){
