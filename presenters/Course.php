@@ -4,7 +4,7 @@
 
 	class Course extends Presenter {
 
-		static $uses = array('styles', 'scripts');
+		static $uses = array('styles', 'scripts', 'admin_scripts');
 		static $presents_for = array('custom_post' => 'course');
 		
 		static function scripts(){

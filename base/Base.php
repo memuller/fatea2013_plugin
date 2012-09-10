@@ -37,10 +37,8 @@
 			array_push(static::$presenters, 'Base');
 			foreach (static::$presenters as $presenter) {
 				require static::path("presenters/$presenter.php");
-				if($presenter != 'Base'){
-					$presenter = $namespace.'Presenters\\'.$presenter;
-					$presenter::build();
-				}
+				$presenter = $namespace.'Presenters\\'.$presenter;
+				$presenter::build();
 			}
 
 			add_action('plugins_loaded', function() use($base, $namespace) {
